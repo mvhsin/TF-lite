@@ -1,0 +1,21 @@
+F32:
+tflite_convert --output_file model_lite/conv_net_f32.tflite \
+--graph_def_file frozen_graphs/conv_net.pb  \
+--input_arrays "input" \
+--input_shapes "1,784" \
+--output_arrays output \
+--output_format TFLITE
+
+UINT8:
+tflite_convert --output_file model_lite/conv_net_uint8.tflite \
+--graph_def_file frozen_graphs/conv_net.pb  \
+--input_arrays "input" \
+--input_shapes "1,784" \
+--output_arrays output \
+--output_format TFLITE \
+--mean_values 128 \
+--std_dev_values 128 \
+--default_ranges_min 0 \
+--default_ranges_max 6 \
+--inference_type QUANTIZED_UINT8 \
+--inference_input_type QUANTIZED_UINT8
